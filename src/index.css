@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.game-over-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.small-card {
+  width: 200px;
+  height: 150px;
+  border-radius: 10px;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.game-over {
+  height: 150px;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.start {
+  display: flex;
+  background-color: #d1e7dd;
+  opacity: 1;
+}
+
+.not-start {
+  text-align: center;
+  background-color: #639454;
+  opacity: 1;
+}
+
+.square {
+  width: 200px;
+  height: 200px;
+  border-style: solid;
+  border-color: #111;
+  cursor: pointer;
+}
+
+.grid {
+  margin-top: 50px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 618px;
+  height: 618px;
+}
+
+.mole {
+  background-image: url("/whack-a-mole/mole.jpg");
+  background-size: cover;
+}
+
+@media (max-width: 520px) {
+  .grid {
+    width: 300px;
+    height: 300px;
+  }
+
+  .square {
+    width: 30%;
+    height: 30%;
+  }
+}
+
+@media (min-width: 520px) and (max-width: 2000px) {
+  .grid {
+    width: 500px;
+    height: 300px;
+  }
+
+  .square {
+    width: 150px;
+    height: 50%;
+  }
+}
