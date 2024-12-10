@@ -20,11 +20,11 @@ function App() {
 
   return (
     <>
-      <Router>
+      <Router basename="/tg-funbot">
         <Routes>
-          <Route path="/tg-funbot" element={<Home userId={userId} />} />
+          <Route path="/" element={<Home userId={userId} />} />
           <Route
-            path="/tg-funbot/whack-a-mole"
+            path="/whack-a-mole"
             element={<WhackAMole userId={userId} />}
           />
         </Routes>
