@@ -51,7 +51,7 @@ export default function Home({ userId }: HomeProps) {
         }}
       >
         <button
-          onClick={() => navigate("/whack-a-mole")}
+          onClick={() => navigate("/tg-funbot/whack-a-mole")}
           style={{
             padding: "0.5rem 1rem",
             background: "#3bb7c7",
