@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import supabase from "./config/supabaseClient";
 import Home from "./components/Home";
 import WhackAMole from "./components/WhackAMole";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [userId, setUserId] = useState<string | null>(null);
@@ -27,6 +28,7 @@ function App() {
             path="/whack-a-mole"
             element={<WhackAMole userId={userId} />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>
