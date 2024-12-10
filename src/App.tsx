@@ -24,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/tg-funbot" element={<Home userId={userId} />} />
           <Route
-            path="/whack-a-mole"
+            path="/tg-funbot/whack-a-mole"
             element={<WhackAMole userId={userId} />}
           />
         </Routes>
