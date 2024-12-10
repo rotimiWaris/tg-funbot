@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import useFetchUser from "../config/useFetchUser";
 import supabase from "../config/supabaseClient";
 import "../index.css";
 
-export default function WhackAMole({ userId }) {
-  const { data: userData, loading, error } = useFetchUser(userId);
+interface Props {
+  userId: string | null;
+}
+
+export default function WhackAMole({ userId }: Props) {
+  const { data: userData, loading } = useFetchUser(userId);
   const navigate = useNavigate();
 
   const [startGame, setStartGame] = useState(false);
@@ -13,8 +17,8 @@ export default function WhackAMole({ userId }) {
   const [score, setScore] = useState(0);
   const [currentTime, setCurrentTime] = useState(60);
   const [gameOver, setGameOver] = useState(false);
-  const [hitPosition, setHitPosition] = useState(null);
-  const timerRef = useRef(null); // To store the interval ID
+  const [hitPosition, setHitPosition] = useState<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null); // To store the interval ID
 
   const randomSquare = () => {
     // Reset all squares
@@ -29,7 +33,7 @@ export default function WhackAMole({ userId }) {
     setHitPosition(randomIndex);
   };
 
-  const handleSquareClick = (index) => {
+  const handleSquareClick = (index: number | null) => {
     if (index === hitPosition) {
       setScore((prevScore) => prevScore + 1); // Increment the score
     }
@@ -49,7 +53,7 @@ export default function WhackAMole({ userId }) {
     timerRef.current = setInterval(() => {
       setCurrentTime((prevCurrentTime) => {
         if (prevCurrentTime === 0) {
-          clearInterval(timerRef.current); // Stop timer
+          clearInterval(timerRef.current as NodeJS.Timeout); // Stop timer
           setStartGame(false);
           setGameOver(true);
           updateHighScore();
@@ -72,7 +76,7 @@ export default function WhackAMole({ userId }) {
     timerRef.current = setInterval(() => {
       setCurrentTime((prevCurrentTime) => {
         if (prevCurrentTime === 0) {
-          clearInterval(timerRef.current); // Stop timer
+          clearInterval(timerRef.current as NodeJS.Timeout); // Stop timer
           setStartGame(false);
           setGameOver(true);
           updateHighScore();
@@ -82,7 +86,11 @@ export default function WhackAMole({ userId }) {
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (timerRef.current !== null) {
+        clearInterval(timerRef.current);
+      }
+    };
   };
   // useEffect(() => {
   //   if (gameOver) {
@@ -103,7 +111,7 @@ export default function WhackAMole({ userId }) {
       if (error) {
         console.error("Error updating high score:", error);
       } else {
-        let highscore = userData.high_score;
+        console.error("High score updated!");
       }
     }
   };
@@ -180,7 +188,7 @@ export default function WhackAMole({ userId }) {
             <div>
               <br />
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/tg-funbot")}
                 style={{
                   marginRight: "5px",
                   padding: "0.5rem 1rem",

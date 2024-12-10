@@ -1,11 +1,23 @@
 import { create } from "zustand";
 
-export const useUserStore = create((set) => ({
-  // Initial state
-  user: null, // The current user object
-  isNewUser: false, // Flag indicating if the user is new
+// Define the User type
+interface User {
+  id: string;
+  username: string;
+  high_score: number;
+}
 
-  // Actions to update the state
-  setUser: (user) => set({ user }), // Update the user state
-  setIsNewUser: (isNew) => set({ isNewUser: isNew }), // Update the isNewUser flag
+// Define the store state and actions
+interface UserStore {
+  user: User | null;
+  setUser: (user: User) => void;
+  isNewUser: boolean;
+  setIsNewUser: (isNewUser: boolean) => void;
+}
+
+export const useUserStore = create<UserStore>((set) => ({
+  user: null,
+  setUser: (user) => set({ user }),
+  isNewUser: true, // Initial value for isNewUser
+  setIsNewUser: (isNewUser) => set({ isNewUser }), // Function to update the state
 }));

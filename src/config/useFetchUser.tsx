@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import supabase from "../config/supabaseClient";
 
-const useFetchUser = (userId) => {
-  const [data, setData] = useState(null);
+interface User {
+  id: string;
+  username: string;
+  high_score: number;
+  // Add other fields from your "users" table
+}
+
+const useFetchUser = (userId: string | null) => {
+  const [data, setData] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -26,7 +33,7 @@ const useFetchUser = (userId) => {
         console.error("Error fetching user data:", error);
         setError("Failed to fetch user data");
       } else {
-        setData(data);
+        setData(data as User);
       }
 
       setLoading(false);

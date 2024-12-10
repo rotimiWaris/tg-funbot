@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import useFetchUser from "../config/useFetchUser";
 import "../index.css";
 
-export default function Home({ userId }) {
+interface HomeProps {
+  userId: string | null;
+}
+
+export default function Home({ userId }: HomeProps) {
   const navigate = useNavigate();
-  const { data: userData, loading, error } = useFetchUser(userId);
+  const { data: userData, loading } = useFetchUser(userId);
   const [delayedLoading, setDelayedLoading] = useState(true); // New state for delayed loading
 
   // Set timeout to delay the transition from loading to content
