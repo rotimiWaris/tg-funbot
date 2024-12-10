@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Router basename="/tg-funbot">
+      <Router>
         <Routes>
           <Route path="/" element={<Home userId={userId} />} />
           <Route
