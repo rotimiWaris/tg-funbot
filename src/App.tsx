@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import supabase from "./config/supabaseClient";
 import Home from "./components/Home";
@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Router basename="/tg-funbot">
+      <Router>
         <Routes>
           <Route path="/" element={<Home userId={userId} />} />
           <Route
