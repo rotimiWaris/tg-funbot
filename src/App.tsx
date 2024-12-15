@@ -28,7 +28,7 @@ function App() {
             path="/whack-a-mole"
             element={<WhackAMole userId={userId} />}
           />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </Router>
     </>
