@@ -188,7 +188,7 @@ export default function WhackAMole({ userId }: Props) {
             <div>
               <br />
               <button
-                onClick={() => navigate("/tg-funbot")}
+                onClick={() => navigate("/tg-funbot/")}
                 style={{
                   marginRight: "5px",
                   padding: "0.5rem 1rem",

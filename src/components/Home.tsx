@@ -1,47 +1,57 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import useFetchUser from "../config/useFetchUser";
+// import useFetchUser from "../config/useFetchUser";
 import "../index.css";
 
-interface HomeProps {
-  userId: string | null;
-}
+// interface HomeProps {
+//   userId: string | null;
+// }
 
-export default function Home({ userId }: HomeProps) {
+export default function Home() {
+  const [username, setUsername] = useState("Guest");
   const navigate = useNavigate();
-  const { data: userData, loading } = useFetchUser(userId);
-  const [delayedLoading, setDelayedLoading] = useState(true); // New state for delayed loading
+  // const { data: userData, loading } = useFetchUser(userId);
+  // const [delayedLoading, setDelayedLoading] = useState(true); // New state for delayed loading
 
   // Set timeout to delay the transition from loading to content
+  // useEffect(() => {
+  //   if (loading) {
+  //     const timer = setTimeout(() => {
+  //       document.body.style.backgroundColor = "#111";
+  //       setDelayedLoading(true); // Set delayed loading after 3 seconds
+  //     }, 3000);
+
+  //     return () => clearTimeout(timer); // Cleanup the timeout on component unmount
+  //   } else {
+  //     setDelayedLoading(false); // Once loading is complete, set delayedLoading to false
+  //   }
+  // }, [loading]); // Dependency on loading, so it runs when loading changes
+
+  // if (delayedLoading) {
+  //   return (
+  //     <div className="container">
+  //       <img
+  //         src="/funbot.jpg"
+  //         alt="Loading user data..."
+  //         style={{ width: "100%" }}
+  //       />
+  //       <p style={{ color: "white" }}>Loading...</p>
+  //     </div>
+  //   );
+  // }
+
+  // Retrieve Telegram username from URL parameters
   useEffect(() => {
-    if (loading) {
-      const timer = setTimeout(() => {
-        document.body.style.backgroundColor = "#111";
-        setDelayedLoading(true); // Set delayed loading after 3 seconds
-      }, 3000);
-
-      return () => clearTimeout(timer); // Cleanup the timeout on component unmount
-    } else {
-      setDelayedLoading(false); // Once loading is complete, set delayedLoading to false
+    const params = new URLSearchParams(window.location.search);
+    const tgUsername = params.get("username");
+    if (tgUsername) {
+      setUsername(tgUsername);
     }
-  }, [loading]); // Dependency on loading, so it runs when loading changes
-
-  if (delayedLoading) {
-    return (
-      <div className="container">
-        <img
-          src="/funbot.jpg"
-          alt="Loading user data..."
-          style={{ width: "100%" }}
-        />
-        <p style={{ color: "white" }}>Loading...</p>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div>
-      <h1>Hello, {userData?.username || "Guest"}!</h1>
+      <h1>Hello, {username}!</h1>
       <div
         style={{
           display: "flex",

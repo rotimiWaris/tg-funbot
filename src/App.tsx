@@ -23,7 +23,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home userId={userId} />} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/whack-a-mole"
             element={<WhackAMole userId={userId} />}
