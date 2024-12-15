@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import supabase from "./config/supabaseClient";
 import Home from "./components/Home";
 import WhackAMole from "./components/WhackAMole";
-import NotFound from "./components/NotFound";
+// import NotFound from "./components/NotFound";
 
 function App() {
   const [userId, setUserId] = useState<string | null>(null);
